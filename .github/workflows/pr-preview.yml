@@ -1,0 +1,62 @@
+name: PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  build-and-deploy:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+        env:
+          VITE_BASE: './'
+      - name: Deploy preview to gh-pages/pr-N
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          destination_dir: pr-${{ github.event.number }}
+      - name: Comment PR with preview URL
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const url = `https://${context.repo.owner}.github.io/${context.repo.repo}/pr-${{ github.event.number }}/`;
+            github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: context.payload.number, body: `Preview: ${url}` });
+
+  remove-preview:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          persist-credentials: true
+          fetch-depth: 0
+      - name: Remove preview directory and push
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git rm -rf pr-${{ github.event.number }} || true
+          git commit -m "chore: remove preview for pr-${{ github.event.number }}" || true
+          git push origin gh-pages || true
