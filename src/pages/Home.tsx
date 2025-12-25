@@ -1,52 +1,63 @@
+import './Home.css';
 import { useState } from 'react';
 
 const Home = () => {
-  const [section, setSection] = useState('news');
-
-  const renderSection = () => {
-    switch(section) {
-      case 'news': return <div><h2>News</h2><p>Welcome to Skates Game Hosting! Check out the latest updates and announcements.</p></div>;
-      case 'current-booking': return <div><h2>Current Booking</h2><p>You have no active bookings at the moment.</p></div>;
-      case 'fun-stuff': return <div><h2>Other Fun Stuff</h2><p>Enjoy some fun content and community features.</p></div>;
-      case 'report-bug': return <ReportBug />;
-      case 'contact': return <div><h2>Contact</h2><p>Get in touch with us for support.</p></div>;
-      default: return <div><h2>News</h2><p>Welcome to Skates Game Hosting! Check out the latest updates and announcements.</p></div>;
-    }
-  };
+  const [servers] = useState([
+    { name: 'Inferno-01', status: 'ONLINE', players: 24 },
+    { name: 'Abyss-02', status: 'MAINT', players: 0 },
+    { name: 'Oblivion-09', status: 'ONLINE', players: 8 }
+  ]);
 
   return (
-    <div style={{ padding: '20px', border: '1px solid #ccc', margin: '20px' }}>
-      <h1>Home Dashboard</h1>
-      <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
-        <button onClick={() => setSection('news')}>News</button>
-        <button onClick={() => setSection('current-booking')}>Current Booking</button>
-        <button onClick={() => setSection('fun-stuff')}>Other fun stuff</button>
-        <button onClick={() => setSection('report-bug')}>Report a Bug</button>
-        <button onClick={() => setSection('contact')}>Contact</button>
-      </div>
-      {renderSection()}
-    </div>
-  );
-};
+    <main className="sg-main">
+      <section className="sg-hero">
+        <div className="sg-hero-left">
+          <h1>Skates Game Hosting</h1>
+          <p className="sg-sub">Dark. Fast. Merciless. Your servers, sharpened for war.</p>
+          <div className="sg-cta-row">
+            <button className="sg-cta primary">Get a Server</button>
+            <button className="sg-cta ghost">Explore</button>
+          </div>
+        </div>
+        <div className="sg-hero-right">
+          <div className="sg-stat-card">
+            <div className="label">Active Servers</div>
+            <div className="value">{servers.length}</div>
+          </div>
+          <div className="sg-stat-card dark">
+            <div className="label">Players Online</div>
+            <div className="value">{servers.reduce((a,s)=>a+s.players,0)}</div>
+          </div>
+        </div>
+      </section>
 
-const ReportBug = () => {
-  const [bug, setBug] = useState('');
+      <section className="sg-grid">
+        <div className="sg-panel">
+          <h3>Servers</h3>
+          <ul className="sg-servers">
+            {servers.map(s=> (
+              <li key={s.name} className={`sg-server-item ${s.status==='ONLINE'?'online':'maintenance'}`}>
+                <div className="name">{s.name}</div>
+                <div className="meta">{s.players} players • {s.status}</div>
+                <div className="controls"><button className="tiny">Manage</button></div>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-  const submit = async () => {
-    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/bug`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ bug })
-    });
-    if (res.ok) alert('Bug reported');
-  };
-
-  return (
-    <div>
-      <h2>Report a Bug</h2>
-      <textarea value={bug} onChange={e => setBug(e.target.value)} placeholder="Describe the bug" />
-      <button onClick={submit}>Submit</button>
-    </div>
+        <div className="sg-panel">
+          <h3>Latest News</h3>
+          <article className="sg-news">
+            <h4>New region launched</h4>
+            <p>Our newest node has low-latency routing and better DDoS protection.</p>
+          </article>
+          <article className="sg-news">
+            <h4>Maintenance schedule</h4>
+            <p>Planned maintenance on the 1st of next month. Expect brief interruptions.</p>
+          </article>
+        </div>
+      </section>
+    </main>
   );
 };
 
