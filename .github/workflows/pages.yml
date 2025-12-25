@@ -27,7 +27,7 @@ jobs:
     - name: Build
       run: npm run build
       env:
-        VITE_BASE: /${{ github.event.repository.name }}/
+        VITE_BASE: './'
         VITE_API_BASE_URL: https://api.yourdomain.com
     - name: Verify built assets
       run: |
