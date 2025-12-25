@@ -6,17 +6,18 @@
 }
 
 .sg-sidebar{
-  width:220px;
-  min-width:220px;
+  width:180px;
+  min-width:180px;
   background:linear-gradient(180deg,#071018 0%, #0b0f14 100%);
   color:#e6eef6;
   height:100vh;
   display:flex;
   flex-direction:column;
-  padding:28px 18px;
+  padding:20px 14px;
   box-shadow: 2px 0 18px rgba(0,0,0,0.6);
   position:fixed;
   left:0;top:0;bottom:0;
+  transition: width .18s ease, padding .18s ease;
 }
 
 .sg-logo{font-weight:800;font-size:20px;letter-spacing:1px;margin-bottom:26px}
