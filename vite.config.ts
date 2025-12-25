@@ -8,6 +8,9 @@ export default defineConfig({
   // the build works when served from a repo subpath (like GitHub Pages)
   base: process.env.VITE_BASE || './',
   build: {
-    sourcemap: false,
+    sourcemap: true,
+    minify: false,
+    // keep a modern target to avoid transpilation issues in minifiers if needed
+    target: 'es2020',
   },
 })
