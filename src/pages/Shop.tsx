@@ -1,34 +1,51 @@
 import { useState, useEffect } from 'react';
+import { getPacks, buyPack } from '../api';
+import './Shop.css';
 
 const Shop = () => {
   const [packs, setPacks] = useState<any[]>([]);
+  const [cart, setCart] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/shop/packs`)
-      .then(res => res.json())
-      .then(setPacks);
+    getPacks().then(setPacks).catch(()=>setPacks([]));
   }, []);
 
-  const buy = async (packId: string) => {
-    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/shop/buy`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ packId })
-    });
-    if (res.ok) alert('Purchase successful');
-  };
+  const addToCart = (pack:any)=> setCart(s=>[...s,pack]);
+  const checkout = async ()=>{
+    for(const p of cart){
+      await buyPack(p.id);
+    }
+    alert('Thank you for your purchases');
+    setCart([]);
+  }
 
   return (
-    <div>
+    <div style={{padding:28}}>
       <h1>Shop</h1>
-      {packs.map((pack: any) => (
-        <div key={pack.id} style={{ border: '1px solid #ccc', padding: '10px', margin: '10px' }}>
-          <h3>{pack.name}</h3>
-          <p>{pack.description}</p>
-          <p>Price: {pack.price}</p>
-          <button onClick={() => buy(pack.id)}>Buy</button>
+      <div className="sg-shop-grid">
+        {packs.map(pack=> (
+          <div className="sg-pack" key={pack.id}>
+            <h4>{pack.name}</h4>
+            <p>{pack.description}</p>
+            <div className="price">{pack.price} FG</div>
+            <div style={{marginTop:10}}>
+              <button onClick={()=>addToCart(pack)} className="primary">Add to cart</button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {cart.length>0 && (
+        <div className="sg-cart">
+          <div><strong>Cart</strong> ({cart.length})</div>
+          <ul>
+            {cart.map((c,i)=> <li key={i}>{c.name} — {c.price} FG</li>)}
+          </ul>
+          <div style={{marginTop:8}}>
+            <button className="primary" onClick={checkout}>Checkout</button>
+          </div>
         </div>
-      ))}
+      )}
     </div>
   );
 };
