@@ -29,6 +29,15 @@ jobs:
       env:
         VITE_BASE: /${{ github.event.repository.name }}/
         VITE_API_BASE_URL: https://api.yourdomain.com
+    - name: Verify built assets
+      run: |
+        if ! grep -q "\.\/assets\/" dist/index.html; then
+          echo "ERROR: dist/index.html does not contain ./assets/ — failing build" >&2
+          echo "--" >&2
+          echo "Contents of dist/index.html:" >&2
+          sed -n '1,200p' dist/index.html >&2
+          exit 1
+        fi
     - name: Setup Pages
       uses: actions/configure-pages@v4
     - name: Upload artifact
