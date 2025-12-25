@@ -12,5 +12,8 @@ main{display:block;margin-left:180px;padding:88px 28px 28px;transition:margin-le
   main{margin-left:0;padding:76px 14px 14px}
 }
 
+/* Logo bottom-right */
+.site-logo-bottom{position:fixed;right:18px;bottom:18px;width:72px;opacity:0.14;z-index:5;pointer-events:none;filter:drop-shadow(0 6px 24px rgba(0,0,0,0.25))}
+
 /* small utilities */
 .h-split{display:flex;gap:12px}
