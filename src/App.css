@@ -6,7 +6,11 @@
 }
 
 /* make sure main content scrolls and sits to the right of the sidebar */
-main{display:block}
+main{display:block;margin-left:180px;padding:88px 28px 28px;transition:margin-left .18s ease,padding .18s ease}
+
+@media (max-width:800px){
+  main{margin-left:0;padding:76px 14px 14px}
+}
 
 /* small utilities */
 .h-split{display:flex;gap:12px}
