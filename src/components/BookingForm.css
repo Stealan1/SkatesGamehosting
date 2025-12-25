@@ -1,0 +1,9 @@
+.sg-booking{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;max-width:720px}
+.sg-booking h2{margin:0 0 12px}
+.row{margin-bottom:12px}
+.row label{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}
+.row input,.row select{width:100%;padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:#e6eef6}
+.row.two{display:flex;gap:12px}
+.row.two > div{flex:1}
+.row.summary{display:flex;align-items:center;justify-content:space-between}
+.primary{background:linear-gradient(90deg,var(--accent),#ff6a6a);padding:10px 18px;border-radius:10px;border:none;color:#fff;font-weight:700}
