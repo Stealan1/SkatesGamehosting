@@ -1,8 +1,8 @@
 :root{
-  --bg:#0b0f14;
-  --panel:#0f1418;
-  --accent:#ff2e2e;
-  --muted:#9aa6b2;
+  --bg: var(--bg, #0b0f14);
+  --panel: var(--panel, #0f1418);
+  --accent: var(--accent, #BD34FE);
+  --muted: var(--muted, #9aa6b2);
 }
 
 .sg-sidebar{

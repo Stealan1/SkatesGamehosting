@@ -7,7 +7,7 @@
 .sg-sub{color:var(--muted);margin-bottom:20px}
 .sg-cta-row{display:flex;gap:12px}
 .sg-cta{padding:12px 18px;border-radius:10px;font-weight:700;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
-.sg-cta.primary{background:linear-gradient(90deg,var(--accent),#ff6a6a);box-shadow:var(--glow)}
+.sg-cta.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:var(--glow)}
 .sg-cta.ghost{background:rgba(255,255,255,0.02)}
 
 .sg-hero-right{display:flex;flex-direction:column;gap:12px}

@@ -2,10 +2,10 @@ import BookingForm from '../components/BookingForm';
 
 const Book = () => {
   return (
-    <div style={{ padding: 28 }}>
+    <main className="sg-main">
       <h1>Book</h1>
       <BookingForm />
-    </div>
+    </main>
   );
 };
 

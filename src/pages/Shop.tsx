@@ -20,7 +20,7 @@ const Shop = () => {
   }
 
   return (
-    <div style={{padding:28}}>
+    <main className="sg-main">
       <h1>Shop</h1>
       <div className="sg-shop-grid">
         {packs.map(pack=> (
@@ -46,7 +46,7 @@ const Shop = () => {
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 };
 
