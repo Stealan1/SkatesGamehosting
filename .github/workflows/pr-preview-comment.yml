@@ -1,0 +1,32 @@
+name: PR Preview Comment
+
+on:
+  workflow_run:
+    workflows: ["PR Preview"]
+    types: [completed]
+
+permissions:
+  issues: write
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post preview comment
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const run = github.context.payload.workflow_run;
+            if (!run) return;
+            if (run.conclusion !== 'success') return;
+            const prs = run.pull_requests || [];
+            if (prs.length === 0) {
+              console.log('No PR associated with this workflow run, skipping comment.');
+              return;
+            }
+            const prNumber = prs[0].number;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const url = `https://${owner}.github.io/${repo}/pr-${prNumber}/`;
+            await github.rest.issues.createComment({ owner, repo, issue_number: prNumber, body: `Preview: ${url}` });
