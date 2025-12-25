@@ -1,0 +1,33 @@
+:root{
+  --bg:#0b0f14;
+  --panel:#0f1418;
+  --accent:#ff2e2e;
+  --muted:#9aa6b2;
+}
+
+.sg-sidebar{
+  width:220px;
+  min-width:220px;
+  background:linear-gradient(180deg,#071018 0%, #0b0f14 100%);
+  color:#e6eef6;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  padding:28px 18px;
+  box-shadow: 2px 0 18px rgba(0,0,0,0.6);
+  position:fixed;
+  left:0;top:0;bottom:0;
+}
+
+.sg-logo{font-weight:800;font-size:20px;letter-spacing:1px;margin-bottom:26px}
+.sg-dot{color:var(--accent);margin-left:6px}
+.sg-nav{display:flex;flex-direction:column;gap:14px}
+.sg-nav a{color:var(--muted);text-decoration:none;padding:10px;border-radius:6px;font-weight:600}
+.sg-nav a.active{background:linear-gradient(90deg, rgba(255,46,46,0.12), rgba(255,46,46,0.06));color:#fff;box-shadow:0 6px 18px rgba(255,46,46,0.04)}
+.sg-nav a:hover{color:#fff}
+
+.sg-side-footer{color:var(--muted);font-size:12px;margin-top:auto}
+
+@media (max-width:800px){
+  .sg-sidebar{display:none}
+}
