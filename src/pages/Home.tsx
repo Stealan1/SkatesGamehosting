@@ -5,12 +5,12 @@ const Home = () => {
 
   const renderSection = () => {
     switch(section) {
-      case 'news': return <div><h2>News</h2><p>Latest news here.</p></div>;
-      case 'current-booking': return <div><h2>Current Booking</h2><p>Your current booking details.</p></div>;
-      case 'fun-stuff': return <div><h2>Other Fun Stuff</h2><p>Fun content.</p></div>;
+      case 'news': return <div><h2>News</h2><p>Welcome to Skates Game Hosting! Check out the latest updates and announcements.</p></div>;
+      case 'current-booking': return <div><h2>Current Booking</h2><p>You have no active bookings at the moment.</p></div>;
+      case 'fun-stuff': return <div><h2>Other Fun Stuff</h2><p>Enjoy some fun content and community features.</p></div>;
       case 'report-bug': return <ReportBug />;
-      case 'contact': return <div><h2>Contact</h2><p>Contact information.</p></div>;
-      default: return <div><h2>News</h2><p>Latest news here.</p></div>;
+      case 'contact': return <div><h2>Contact</h2><p>Get in touch with us for support.</p></div>;
+      default: return <div><h2>News</h2><p>Welcome to Skates Game Hosting! Check out the latest updates and announcements.</p></div>;
     }
   };
 
