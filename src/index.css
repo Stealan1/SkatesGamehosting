@@ -1,20 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap');
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  line-height: 1.45;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(230, 238, 246, 0.95);
   background-color: #07080b;
 
-  /* Brand colors (tuned to logo: warm / bonfire) */
+  /* Brand colors (logo-driven warm bonfire) */
   --brand-start: #FFD166; /* gold */
   --brand-end: #FF6A00;   /* orange */
   --accent: var(--brand-end);
   --accent-2: var(--brand-start);
-  --glow: 0 12px 30px rgba(255,106,0,0.12);
+  --bg-deep: #060607;
+  --panel: rgba(255,255,255,0.02);
   --muted: #c9b6a3;
+  --glass: rgba(255,255,255,0.03);
+  --glow: 0 18px 50px rgba(255,106,0,0.12);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -33,10 +36,14 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image:
+    radial-gradient(600px 400px at 85% 80%, rgba(255,106,0,0.06), transparent 10%),
+    linear-gradient(180deg,var(--bg-deep),#020203 60%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1 {
@@ -45,33 +52,30 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+  padding: 0.6em 1.1em;
+  font-size: 0.98em;
+  font-weight: 700;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  color: #111;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+  box-shadow: var(--glow);
 }
-button:hover {
-  border-color: #646cff;
-}
+button:hover { transform: translateY(-2px); }
+button:active { transform: translateY(0); opacity: .95 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  :root { color: #213547; background-color: #fff; }
 }
+
+/* small utility containers */
+.sg-main { max-width: 1100px; margin: 0 auto; }
+
+.card { background: linear-gradient(180deg,var(--panel), rgba(255,255,255,0.01)); padding: 18px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
