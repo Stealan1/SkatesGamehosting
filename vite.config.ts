@@ -9,7 +9,7 @@ export default defineConfig({
   base: process.env.VITE_BASE || './',
   build: {
     sourcemap: true,
-    minify: false,
+    minify: 'esbuild',
     // keep a modern target to avoid transpilation issues in minifiers if needed
     target: 'es2020',
   },
