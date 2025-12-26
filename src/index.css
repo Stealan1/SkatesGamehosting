@@ -8,13 +8,13 @@
   color: rgba(230, 238, 246, 0.95);
   background-color: #07080b;
 
-  /* Brand colors (tuned to logo) */
-  --brand-start: #41D1FF; /* cyan */
-  --brand-end: #BD34FE;   /* purple */
+  /* Brand colors (tuned to logo: warm / bonfire) */
+  --brand-start: #FFD166; /* gold */
+  --brand-end: #FF6A00;   /* orange */
   --accent: var(--brand-end);
   --accent-2: var(--brand-start);
-  --glow: 0 12px 30px rgba(189,52,254,0.12);
-  --muted: #9aa6b2;
+  --glow: 0 12px 30px rgba(255,106,0,0.12);
+  --muted: #c9b6a3;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

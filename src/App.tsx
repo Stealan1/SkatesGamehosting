@@ -6,7 +6,7 @@ import Book from './pages/Book';
 import Shop from './pages/Shop';
 import Account from './pages/Account';
 import Login from './pages/Login';
-import logo from './assets/logo.svg';
+import logoFull from './assets/logo-full.svg';
 import './App.css';
 
 function App() {
@@ -21,7 +21,9 @@ function App() {
         <Route path="/account" element={<Account />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-      <img src={logo} className="site-logo-bottom" alt="logo" />
+      <a href="/" aria-label="SkatesGamehosting home">
+        <img src={logoFull} className="site-logo-bottom" alt="Skates Gamehosting logo" />
+      </a>
     </Router>
   );
 }
